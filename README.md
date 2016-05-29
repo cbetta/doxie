@@ -79,6 +79,22 @@ client.recent_scans
 }
 ```
 
+### GET /scans/DOXIE/JPEG/IMG_XXXX.JPG
+
+There are 2 ways to get a scan off your Doxie. The first is to get the raw binary content and then do something with it yourself.
+
+```rb
+client.scan "/DOXIE/JPEG/IMG_0001.JPG"
+=> "...?]?1:Xt?????'A??}:<??13???z*???}?rT???????z!ESj?/?..."
+```
+
+The other is to pass in a filename:
+
+```rb
+client.scan "/DOXIE/JPEG/IMG_0001.JPG", 'test.jpg'
+=> true
+```
+
 ## Contributing
 
  1. **Fork** the repo on GitHub

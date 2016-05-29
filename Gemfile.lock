@@ -1,25 +1,18 @@
 PATH
   remote: .
   specs:
-    doxie (0.0.2)
+    doxie (0.0.5)
 
 GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.4.0)
-    ansi (1.5.0)
-    builder (3.2.2)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
+    fakefs (0.8.1)
     hashdiff (0.3.0)
     minitest (5.9.0)
-    minitest-reporters (1.1.9)
-      ansi
-      builder
-      minitest (>= 5.0)
-      ruby-progressbar
     rake (11.1.2)
-    ruby-progressbar (1.8.1)
     safe_yaml (1.0.4)
     webmock (2.0.3)
       addressable (>= 2.3.6)
@@ -31,8 +24,8 @@ PLATFORMS
 
 DEPENDENCIES
   doxie!
+  fakefs
   minitest
-  minitest-reporters
   rake
   webmock
 

@@ -1,7 +1,7 @@
 
 Gem::Specification.new do |s|
   s.name        = 'doxie'
-  s.version     = '0.0.5'
+  s.version     = '0.0.6'
   s.summary     = "Doxie API Wrapper for getting scans off your Doxie scanner"
   s.description = "Doxie API Wrapper for getting scans off your Doxie scanner"
   s.authors     = ["Cristiano Betta"]
@@ -13,5 +13,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rake')
   s.add_development_dependency('webmock')
   s.add_development_dependency('minitest')
-  s.add_development_dependency('minitest-reporters')
+  s.add_development_dependency('fakefs')
 end

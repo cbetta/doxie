@@ -1,7 +1,8 @@
 require 'minitest/autorun'
 require 'webmock/minitest'
-require "minitest/reporters"
+require 'fakefs'
 require 'doxie'
+
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 describe 'Doxie::Client' do
@@ -54,6 +55,20 @@ describe 'Doxie::Client' do
       stub_request(:get, "#{@base_url}/scans/recent.json")
         .to_return(@json_response_body)
       @client.recent_scans.must_equal(@json_response_object)
+    end
+  end
+
+  describe 'get /scans/DOXIE/JPEG/IMG_0001.JPG' do
+    it 'should return the result' do
+      stub_request(:get, "#{@base_url}/scans/DOXIE/JPEG/IMG_0001.JPG")
+        .to_return(@json_response_body)
+      @client.scan('/DOXIE/JPEG/IMG_0001.JPG').must_equal(@json_response_object)
+    end
+
+    it 'should write to file' do
+      stub_request(:get, "#{@base_url}/scans/DOXIE/JPEG/IMG_0001.JPG")
+        .to_return(@json_response_body)
+      @client.scan('/DOXIE/JPEG/IMG_0001.JPG', 'test.jpg').must_equal(true)
     end
   end
 

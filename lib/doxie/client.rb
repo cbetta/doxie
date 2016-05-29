@@ -36,6 +36,9 @@ class Doxie::Client
     get('/scans/recent.json')
   end
 
+  def scan scan_name, file_name = nil
+    file "/scans#{scan_name}", file_name
+  end
 
   private
 
@@ -69,6 +72,16 @@ class Doxie::Client
       raise ServerError, "#{response.code} response from #{ip}"
     else
       raise Error, "#{response.code} response from #{ip}"
+    end
+  end
+
+  def file scan_name, file_name
+    body = get(scan_name)
+    if file_name
+      File.open(file_name, 'wb') { |file| file.write(body) }
+      true
+    else
+      body
     end
   end
 end
