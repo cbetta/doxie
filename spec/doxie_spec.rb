@@ -70,6 +70,20 @@ describe 'Doxie::Client' do
     end
   end
 
+  describe 'get /thumbnails/DOXIE/JPEG/IMG_0001.JPG' do
+    it 'should return the result' do
+      stub_request(:get, "#{@base_url}/thumbnails/DOXIE/JPEG/IMG_0001.JPG")
+        .to_return(@json_response_body)
+      @client.thumbnail('/DOXIE/JPEG/IMG_0001.JPG').must_equal(@json_response_object)
+    end
+
+    it 'should write to file' do
+      stub_request(:get, "#{@base_url}/thumbnails/DOXIE/JPEG/IMG_0001.JPG")
+        .to_return(@json_response_body)
+      @client.thumbnail('/DOXIE/JPEG/IMG_0001.JPG', 'test.jpg').must_equal(true)
+    end
+  end
+
   it 'raises an authentication error exception if the response code is 401' do
     stub_request(:get, "#{@base_url}/hello.json")
       .to_return(status: 401)

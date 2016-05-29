@@ -41,6 +41,10 @@ module Doxie
       file "/scans#{scan_name}", file_name
     end
 
+    def thumbnail scan_name, file_name = nil
+      file "/thumbnails#{scan_name}", file_name
+    end
+
     private
 
     def get path
