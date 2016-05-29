@@ -8,7 +8,7 @@ class Doxie::Client
   class AuthenticationError < ClientError; end
 
   USERNAME = 'doxie'.freeze
-  
+
   attr_accessor :ip, :password
 
   def initialize options
@@ -28,6 +28,15 @@ class Doxie::Client
     get('/restart.json')
   end
 
+  def scans
+    get('/scans.json')
+  end
+
+  def recent_scans
+    get('/scans/recent.json')
+  end
+
+
   private
 
   def get path
@@ -45,7 +54,7 @@ class Doxie::Client
   def parse response
     case response
     when Net::HTTPNoContent
-      return true
+      return nil
     when Net::HTTPSuccess
       if response['Content-Type'].split(';').first == 'application/json'
         JSON.parse(response.body)

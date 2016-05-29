@@ -27,14 +27,26 @@ client = Doxie::Client.new(ip: '192.168.1.2', password: 'test')
 
 ```rb
 client.hello
-=> {"model"=>"DX250", "name"=>"Doxie_062300", "firmwareWiFi"=>"1.29", "hasPassword"=>false, "MAC"=>"00:11:11:11:11:00", "mode"=>"Client", "network"=>"YourNetworkName", "ip"=>"192.168.1.2"}
+=> {
+           "model" => "DX250",
+            "name" => "Doxie_062300",
+    "firmwareWiFi" => "1.29",
+     "hasPassword" => true,
+             "MAC" => "00:11:11:11:11:00",
+            "mode" => "Client",
+         "network" => "YourWifi",
+              "ip" => "192.168.1.2"
+}
 ```
 
 ### GET /hello_extra.json
 
 ```rb
 client.hello_extra
-=> {"firmware"=>"0.26", "connectedToExternalPower"=>false}
+=> {
+                    "firmware" => "0.26",
+    "connectedToExternalPower" => true
+}
 ```
 
 ### GET /restart.json
@@ -42,6 +54,29 @@ client.hello_extra
 ```rb
 client.restart
 => true
+```
+
+### GET /scans.json
+
+```rb
+client.scans
+=> [
+    [0] {
+            "name" => "/DOXIE/JPEG/IMG_0001.JPG",
+            "size" => 900964,
+        "modified" => "2010-05-01 00:02:38"
+    }
+]
+```
+
+
+### GET /scans/recent.json
+
+```rb
+client.recent_scans
+=> {
+    "path" => "/DOXIE/JPEG/IMG_0001.JPG"
+}
 ```
 
 ## Contributing

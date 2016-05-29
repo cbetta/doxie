@@ -37,7 +37,23 @@ describe 'Doxie::Client' do
     it 'should return the result' do
       stub_request(:get, "#{@base_url}/restart.json")
         .to_return(status: 204)
-      @client.restart.must_equal(true)
+      @client.restart.must_equal(nil)
+    end
+  end
+
+  describe 'get /scans.json' do
+    it 'should return the result' do
+      stub_request(:get, "#{@base_url}/scans.json")
+        .to_return(@json_response_body)
+      @client.scans.must_equal(@json_response_object)
+    end
+  end
+
+  describe 'get /scans/recent.json' do
+    it 'should return the result' do
+      stub_request(:get, "#{@base_url}/scans/recent.json")
+        .to_return(@json_response_body)
+      @client.recent_scans.must_equal(@json_response_object)
     end
   end
 
