@@ -19,6 +19,14 @@ class Doxie::Client
     get('/hello.json')
   end
 
+  def hello_extra
+    get('/hello_extra.json')
+  end
+
+  def restart
+    get('/restart.json')
+  end
+
   private
 
   def get path
@@ -34,6 +42,8 @@ class Doxie::Client
 
   def parse response
     case response
+    when Net::HTTPNoContent
+      return true
     when Net::HTTPSuccess
       if response['Content-Type'].split(';').first == 'application/json'
         JSON.parse(response.body)

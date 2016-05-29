@@ -4,7 +4,6 @@ require "minitest/reporters"
 require 'doxie'
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
-
 describe 'Doxie::Client' do
   def json_response_body(content)
     {headers: {'Content-Type' => 'application/json;charset=utf-8'}, body: content}
@@ -18,11 +17,27 @@ describe 'Doxie::Client' do
     @client = Doxie::Client.new(ip: @ip)
   end
 
-  describe 'hello method' do
-    it 'fetches the hello endpoint and returns the response object' do
+  describe 'get /hello.json' do
+    it 'should return the result' do
       stub_request(:get, "#{@base_url}/hello.json")
         .to_return(@json_response_body)
       @client.hello.must_equal(@json_response_object)
+    end
+  end
+
+  describe 'get /hello_extra.json' do
+    it 'should return the result' do
+      stub_request(:get, "#{@base_url}/hello_extra.json")
+        .to_return(@json_response_body)
+      @client.hello_extra.must_equal(@json_response_object)
+    end
+  end
+
+  describe 'get /restart.json' do
+    it 'should return the result' do
+      stub_request(:get, "#{@base_url}/restart.json")
+        .to_return(status: 204)
+      @client.restart.must_equal(true)
     end
   end
 
