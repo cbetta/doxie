@@ -118,6 +118,13 @@ client.delete_scan "/DOXIE/JPEG/IMG_0001.JPG"
 => true
 ```
 
+### POST /scans/delete.json
+
+```rb
+client.delete_scans ["/DOXIE/JPEG/IMG_0001.JPG", "/DOXIE/JPEG/IMG_0002.JPG"]
+=> true
+```
+
 ## Contributing
 
  1. **Fork** the repo on GitHub

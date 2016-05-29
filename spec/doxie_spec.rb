@@ -84,11 +84,19 @@ describe 'Doxie::Client' do
     end
   end
 
-  describe 'delete /scans/DOXIE/JPEG/IMG_0001.JPG' do
+  describe 'DELETE /scans/DOXIE/JPEG/IMG_0001.JPG' do
     it 'should return the result' do
       stub_request(:delete, "#{@base_url}/scans/DOXIE/JPEG/IMG_0001.JPG")
         .to_return(@json_response_body)
       @client.delete_scan('/DOXIE/JPEG/IMG_0001.JPG').must_equal(@json_response_object)
+    end
+  end
+
+  describe 'POST /scans/delete.json' do
+    it 'should return the result' do
+      stub_request(:post, "#{@base_url}/scans/delete.json")
+        .to_return(status: 204)
+      @client.delete_scans(['/DOXIE/JPEG/IMG_0001.JPG']).must_equal(true)
     end
   end
 

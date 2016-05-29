@@ -49,6 +49,10 @@ module Doxie
       delete("/scans#{scan_name}")
     end
 
+    def delete_scans scan_names
+      post("/scans/delete.json", scan_names)
+    end
+
     private
 
     def get path
@@ -56,6 +60,14 @@ module Doxie
       message = Net::HTTP::Get.new(uri.request_uri)
       parse(request(uri, message))
     end
+
+    def post path, params
+      uri = uri_for(path)
+      message = Net::HTTP::Post.new(uri.request_uri)
+      message.body = JSON.generate(params)
+      parse(request(uri, message))
+    end
+
 
     def delete path
       uri = uri_for(path)
