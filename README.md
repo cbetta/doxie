@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/doxie.svg)](https://badge.fury.io/rb/doxie) [![Build Status](https://travis-ci.org/cbetta/doxie.svg?branch=master)](https://travis-ci.org/cbetta/doxie)
 
-A wrapper for the Doxie Go Wifi API. Specification as per the [developer documentation](http://help.getdoxie.com/content/doxiego/05-advanced/03-wifi/04-api/Doxie-API-Developer-Guide.pdf).
+A wrapper for the [Doxie Go Wifi](http://getdoxie.com) API. Specification as per the [developer documentation](http://help.getdoxie.com/content/doxiego/05-advanced/03-wifi/04-api/Doxie-API-Developer-Guide.pdf).
 
 ## Installation
 
