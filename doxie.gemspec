@@ -1,7 +1,7 @@
 
 Gem::Specification.new do |s|
   s.name        = 'doxie'
-  s.version     = '0.0.8'
+  s.version     = '0.0.9'
   s.summary     = "Doxie API Wrapper for getting scans off your Doxie scanner"
   s.description = "Doxie API Wrapper for getting scans off your Doxie scanner"
   s.authors     = ["Cristiano Betta"]

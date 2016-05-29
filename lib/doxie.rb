@@ -45,12 +45,26 @@ module Doxie
       file "/thumbnails#{scan_name}", file_name
     end
 
+    def delete_scan scan_name
+      delete("/scans#{scan_name}")
+    end
+
     private
 
     def get path
-      uri = URI("https://#{ip}:8080#{path}")
+      uri = uri_for(path)
       message = Net::HTTP::Get.new(uri.request_uri)
       parse(request(uri, message))
+    end
+
+    def delete path
+      uri = uri_for(path)
+      message = Net::HTTP::Delete.new(uri.request_uri)
+      parse(request(uri, message))
+    end
+
+    def uri_for path
+      URI("https://#{ip}:8080#{path}")
     end
 
     def request(uri, message)
@@ -62,7 +76,7 @@ module Doxie
     def parse response
       case response
       when Net::HTTPNoContent
-        return nil
+        return true
       when Net::HTTPSuccess
         if response['Content-Type'].split(';').first == 'application/json'
           JSON.parse(response.body)

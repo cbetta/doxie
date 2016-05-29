@@ -36,7 +36,7 @@ describe 'Doxie::Client' do
     it 'should return the result' do
       stub_request(:get, "#{@base_url}/restart.json")
         .to_return(status: 204)
-      @client.restart.must_equal(nil)
+      @client.restart.must_equal(true)
     end
   end
 
@@ -81,6 +81,14 @@ describe 'Doxie::Client' do
       stub_request(:get, "#{@base_url}/thumbnails/DOXIE/JPEG/IMG_0001.JPG")
         .to_return(@json_response_body)
       @client.thumbnail('/DOXIE/JPEG/IMG_0001.JPG', 'test.jpg').must_equal(true)
+    end
+  end
+
+  describe 'delete /scans/DOXIE/JPEG/IMG_0001.JPG' do
+    it 'should return the result' do
+      stub_request(:delete, "#{@base_url}/scans/DOXIE/JPEG/IMG_0001.JPG")
+        .to_return(@json_response_body)
+      @client.delete_scan('/DOXIE/JPEG/IMG_0001.JPG').must_equal(@json_response_object)
     end
   end
 
