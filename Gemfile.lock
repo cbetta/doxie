@@ -1,0 +1,16 @@
+PATH
+  remote: .
+  specs:
+    doxie (0.0.1)
+
+GEM
+  specs:
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  doxie!
+
+BUNDLED WITH
+   1.12.3
