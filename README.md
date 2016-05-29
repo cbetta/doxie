@@ -14,11 +14,11 @@ gem 'doxie'
 
 ### Client
 
-The client accepts a `username`, `password`, and `ip`. You can omit `username` and `password` if your Doxie has non set.
+The client accepts an `ip` and `password`. You can omit the `password` if your Doxie has non set.
 
 ```rb
 require 'doxie'
-client = Doxie::Client.new(username: 'john', password: 'test', ip: '192.168.1.2')
+client = Doxie::Client.new(ip: '192.168.1.2', password: 'test')
 ```
 
 ### GET /hello.json

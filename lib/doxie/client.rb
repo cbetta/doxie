@@ -7,12 +7,13 @@ class Doxie::Client
   class ServerError < Error; end
   class AuthenticationError < ClientError; end
 
-  attr_accessor :username, :password, :ip
+  USERNAME = 'doxie'.freeze
+  
+  attr_accessor :ip, :password
 
   def initialize options
-    @username = options[:username] || ''
-    @password = options[:password] || ''
     @ip = options[:ip] || ''
+    @password = options[:password] || ''
   end
 
   def hello
@@ -36,6 +37,7 @@ class Doxie::Client
   end
 
   def request(uri, message)
+    message.basic_auth USERNAME, password if password
     http = Net::HTTP.new(uri.host, uri.port)
     http.request(message)
   end
