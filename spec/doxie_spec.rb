@@ -3,8 +3,6 @@ require 'webmock/minitest'
 require 'fakefs'
 require 'doxie'
 
-Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
-
 describe 'Doxie::Client' do
   def json_response_body(content)
     {headers: {'Content-Type' => 'application/json;charset=utf-8'}, body: content}
