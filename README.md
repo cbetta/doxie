@@ -111,6 +111,13 @@ client.thumbnail "/DOXIE/JPEG/IMG_0001.JPG", 'test.jpg'
 => true
 ```
 
+### DELETE /scans/DOXIE/JPEG/IMG_XXXX.JPG
+
+```rb
+client.delete_scan "/DOXIE/JPEG/IMG_0001.JPG"
+=> true
+```
+
 ## Contributing
 
  1. **Fork** the repo on GitHub
