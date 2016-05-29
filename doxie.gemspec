@@ -1,7 +1,8 @@
+require File.expand_path('lib/doxie/version', File.dirname(__FILE__))
 
 Gem::Specification.new do |s|
   s.name        = 'doxie'
-  s.version     = '0.0.10'
+  s.version     =  Doxie::VERSION
   s.summary     = "Doxie API Wrapper for getting scans off your Doxie scanner"
   s.description = "Doxie API Wrapper for getting scans off your Doxie scanner"
   s.authors     = ["Cristiano Betta"]
