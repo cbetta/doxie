@@ -1,4 +1,4 @@
-# Doxie Ruby API Wrapper
+# Ruby Doxie API library for Doxie Go Wifi
 
 [![Gem Version](https://badge.fury.io/rb/doxie.svg)](https://badge.fury.io/rb/doxie) [![Build Status](https://travis-ci.org/cbetta/doxie.svg?branch=master)](https://travis-ci.org/cbetta/doxie)
 
