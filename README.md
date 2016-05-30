@@ -10,9 +10,22 @@ Either install directly or via bundler.
 
 ```rb
 gem 'doxie'
+gem 'doxie_scanner' # optional if your Doxie is not on a fixed IP
 ```
 
 ## Usage
+
+### Finding your Doxie
+
+This requires the [`doxie_scanner`](https://github.com/cbetta/doxie_scanner) gem. This gem has a bigger dependency than the `doxie` gem which is why it has been split into a seperate library.
+
+```rb
+require 'doxie_scanner'
+DoxieScanner.ips
+=> [
+    [0] "192.168.1.2"
+]
+```
 
 ### Client
 
@@ -178,7 +191,7 @@ deleting multiple scans, use `/scans/delete.json` for best performance.
 ### POST /scans/delete.json
 
 Deletes multiple scans in a single operation. This is much faster than deleting
-each scan individually. 
+each scan individually.
 
 ```rb
 client.delete_scans ["/DOXIE/JPEG/IMG_0001.JPG", "/DOXIE/JPEG/IMG_0002.JPG"]
