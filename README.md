@@ -214,6 +214,6 @@ client.delete_scans ["/DOXIE/JPEG/IMG_0001.JPG", "/DOXIE/JPEG/IMG_0002.JPG"]
 
 ## Credits and License
 
-Thanks to [@timcraft](https://github.com/timcraft) for the excellent [Nexmo Ruby livrary](https://github.com/Nexmo/nexmo-ruby) which helped me remember how to nicely wrap the Doxie API.
+Thanks to [@timcraft](https://github.com/timcraft) for the excellent [Nexmo Ruby library](https://github.com/Nexmo/nexmo-ruby) which helped me remember how to nicely wrap the Doxie API.
 
 This library is released under the [MIT License](LICENSE).
