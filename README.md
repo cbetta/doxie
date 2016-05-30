@@ -10,7 +10,7 @@ Either install directly or via bundler.
 
 ```rb
 gem 'doxie'
-gem 'doxie_scanner' # optional if your Doxie is not on a fixed IP
+gem 'doxie-scanner' # optional if your Doxie is not on a fixed IP
 ```
 
 ## Usage
@@ -20,8 +20,8 @@ gem 'doxie_scanner' # optional if your Doxie is not on a fixed IP
 This requires the [`doxie_scanner`](https://github.com/cbetta/doxie_scanner) gem. This gem has a bigger dependency than the `doxie` gem which is why it has been split into a seperate library.
 
 ```rb
-require 'doxie_scanner'
-DoxieScanner.ips
+require 'doxie/scanner'
+Doxie::Scanner.ips
 => [
     [0] "192.168.1.2"
 ]
