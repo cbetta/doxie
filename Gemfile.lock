@@ -1,0 +1,35 @@
+PATH
+  remote: .
+  specs:
+    doxie (2.0.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
+    fakefs (0.11.3)
+    hashdiff (0.3.6)
+    minitest (5.10.3)
+    public_suffix (3.0.0)
+    rake (12.1.0)
+    safe_yaml (1.0.4)
+    webmock (3.0.1)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  doxie!
+  fakefs
+  minitest
+  rake
+  webmock
+
+BUNDLED WITH
+   1.16.0.pre.2

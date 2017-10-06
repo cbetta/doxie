@@ -5,11 +5,16 @@ require 'doxie'
 
 describe 'Doxie::Client' do
   def json_response_body(content)
-    {headers: {'Content-Type' => 'application/json;charset=utf-8'}, body: content}
+    {
+      headers: {
+        'Content-Type' => 'application/json;charset=utf-8'
+      },
+      body: content
+    }
   end
 
   before do
-    @json_response_object = {'key' => 'value'}
+    @json_response_object = { 'key' => 'value' }
     @json_response_body = json_response_body('{"key":"value"}')
     @ip = '192.168.1.1'
     @base_url = "http://#{@ip}:8080"
@@ -74,7 +79,8 @@ describe 'Doxie::Client' do
     it 'should return the result' do
       stub_request(:get, "#{@base_url}/thumbnails/DOXIE/JPEG/IMG_0001.JPG")
         .to_return(@json_response_body)
-      @client.thumbnail('/DOXIE/JPEG/IMG_0001.JPG').must_equal(@json_response_object)
+      @client.thumbnail('/DOXIE/JPEG/IMG_0001.JPG')
+             .must_equal(@json_response_object)
     end
 
     it 'should write to file' do
@@ -88,7 +94,8 @@ describe 'Doxie::Client' do
     it 'should return the result' do
       stub_request(:delete, "#{@base_url}/scans/DOXIE/JPEG/IMG_0001.JPG")
         .to_return(@json_response_body)
-      @client.delete_scan('/DOXIE/JPEG/IMG_0001.JPG').must_equal(@json_response_object)
+      @client.delete_scan('/DOXIE/JPEG/IMG_0001.JPG')
+             .must_equal(@json_response_object)
     end
   end
 
@@ -96,25 +103,26 @@ describe 'Doxie::Client' do
     it 'should return the result' do
       stub_request(:post, "#{@base_url}/scans/delete.json")
         .to_return(status: 204)
-      @client.delete_scans(['/DOXIE/JPEG/IMG_0001.JPG']).must_equal(true)
+      @client.delete_scans(['/DOXIE/JPEG/IMG_0001.JPG'])
+             .must_equal(true)
     end
   end
 
   it 'raises an authentication error exception if the response code is 401' do
     stub_request(:get, "#{@base_url}/hello.json")
       .to_return(status: 401)
-    proc { @client.hello }.must_raise(Doxie::Client::AuthenticationError)
+    proc { @client.hello }.must_raise(Doxie::Client::Error)
   end
 
   it 'raises a client error exception if the response code is 4xx' do
     stub_request(:get, "#{@base_url}/hello.json")
       .to_return(status: 400)
-    proc { @client.hello }.must_raise(Doxie::Client::ClientError)
+    proc { @client.hello }.must_raise(Doxie::Client::Error)
   end
 
   it 'raises a server error exception if the response code is 5xx' do
     stub_request(:get, "#{@base_url}/hello.json")
       .to_return(status: 500)
-    proc { @client.hello }.must_raise(Doxie::Client::ServerError)
+    proc { @client.hello }.must_raise(Doxie::Client::Error)
   end
 end

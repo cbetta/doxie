@@ -1,10 +1,10 @@
-require "bundler/gem_tasks"
+require 'bundler/gem_tasks'
 require 'rake/testtask'
 
-task :default => :spec
+task default: :spec
 
 task :console do
-  exec "irb -r doxie -I ./lib"
+  exec 'irb -r doxie -I ./lib'
 end
 
 Rake::TestTask.new(:spec) do |t|
