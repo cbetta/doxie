@@ -9,8 +9,6 @@ deploy:
       rvm: 2.6.0
     api_key: $RUBYGEMS_API_KEY
 rvm:
-  - 2.1
-  - 2.2
   - 2.3
   - 2.4
   - 2.5
