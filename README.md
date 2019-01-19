@@ -80,7 +80,7 @@ client.hello
 }
 ```
 
-* `model`: DX250 for the Doxie Go WiFi.
+* `model`: DX250 for the Doxie Go WiFi, DX255 for the Doxie Go SE, and DX300 for the Doxie Q.
 * `name`: The name of the scanner, which defaults to the form "Doxie_XXXXXX".
   The name of a scanner can be changed by using the Doxie desktop app.
 * `firmwareWiFi`: The Wi-Fi firmware version.
