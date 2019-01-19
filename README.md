@@ -36,7 +36,7 @@ require 'doxie'
 client = Doxie::Client.new(ip: '192.168.1.2', password: 'test')
 ```
 
-### GET /hello.json
+### `GET /hello.json`
 
 Returns status information for the scanner, firmware, network mode, and password
 configuration. Accessing this command does not require a password if one has been
@@ -57,22 +57,22 @@ client.hello
 }
 ```
 
-* __model__: Always DX250.
-* __name__: The name of the scanner, which defaults to the form "Doxie_XXXXXX".
+* `model`: DX250 for the Doxie Go WiFi.
+* `name`: The name of the scanner, which defaults to the form "Doxie_XXXXXX".
   The name of a scanner can be changed by using the Doxie desktop app.
-* __firmwareWiFi__: The Wi-Fi firmware version.
-* __hasPassword__: Indicates whether a password has been set to authenticate API
+* `firmwareWiFi`: The Wi-Fi firmware version.
+* `hasPassword`: Indicates whether a password has been set to authenticate API
   access. Passwords can be set and removed by using the Doxie desktop app.
-* __MAC__: The MAC address of the scanner as shown on the scanner's bottom
+* `MAC`: The MAC address of the scanner as shown on the scanner's bottom
   label.
-* __mode__: "AP" if the scanner is creating its own network or "Client" if the
+* `mode`: "AP" if the scanner is creating its own network or "Client" if the
   scanner is joining an existing network.
-* __network__: If the scanner is in "Client" mode, this is the name of the
+* `network`: If the scanner is in "Client" mode, this is the name of the
   network it has joined.
-* __ip__: If the scanner is in "Client" mode, this is the IP of the scanner on
+* `ip`: If the scanner is in "Client" mode, this is the IP of the scanner on
   the network it has joined.
 
-### GET /hello_extra.json
+### `GET /hello_extra.json`
 
 Returns additional status values. These values are accessed separately from
 those in `/hello.json` because there can be a delay of several seconds in
@@ -87,12 +87,12 @@ client.hello_extra
 }
 ```
 
-* __firmware__: The scanner firmware version.
-* __connectedToExternalPower__: Indicates whether the scanner is connected to
+* `firmware`: The scanner firmware version.
+* `connectedToExternalPower`: Indicates whether the scanner is connected to
   its AC adapter versus running on battery power. This value is not cached, so
   it immediately reflects any state changes.
 
-### GET /restart.json
+### `GET /restart.json`
 
 Restarts the scanner's Wi-Fi system. The scanner's status light blinks blue
 during the restart.
@@ -102,7 +102,7 @@ client.restart
 => true
 ```
 
-### GET /scans.json
+### `GET /scans.json`
 
 Returns an array of all scans currently in the scanner’s memory. After scanning
 a document, the scan will available via the API several second later.
@@ -123,7 +123,7 @@ result, even if there are other scans on the scanner, due to the scanner's
 memory being in use. Consider retrying if a successful HTTP status code is
 returned along with a blank body.
 
-### GET /scans/recent.json
+### `GET /scans/recent.json`
 
 Returns the path to the last scan if available. Monitoring this value for
 changes provides a simple way to detect new scans without having to fetch the
@@ -136,7 +136,7 @@ client.recent_scans
 }
 ```
 
-### GET /scans/DOXIE/JPEG/IMG_XXXX.JPG
+### `GET /scans/DOXIE/JPEG/IMG_XXXX.JPG`
 
 There are 2 ways to get a scan off your Doxie. The first is to get the raw binary content and then do something with it yourself.
 
@@ -152,7 +152,7 @@ client.scan "/DOXIE/JPEG/IMG_0001.JPG", 'test.jpg'
 => true
 ```
 
-### GET /thumbnails/DOXIE/JPEG/IMG_XXXX.JPG
+### `GET /thumbnails/DOXIE/JPEG/IMG_XXXX.JPG`
 
 There are 2 ways to get a thumbnail off your Doxie. The first is to get the raw binary content and then do something with it yourself.
 
@@ -174,7 +174,7 @@ scans are not generated until after the scan has been made available in
 if the thumbnail has not yet been generated. Retrying after a delay is
 recommended to handle such cases.
 
-### DELETE /scans/DOXIE/JPEG/IMG_XXXX.JPG
+### `DELETE /scans/DOXIE/JPEG/IMG_XXXX.JPG`
 
 Deletes the scan at the specified path.
 
@@ -188,7 +188,7 @@ obtained and released. Deleting may fail if the lock cannot be obtained
 (e.g., the scanner is busy), so consider retrying on failure conditions. When
 deleting multiple scans, use `/scans/delete.json` for best performance.
 
-### POST /scans/delete.json
+### `POST /scans/delete.json`
 
 Deletes multiple scans in a single operation. This is much faster than deleting
 each scan individually.
