@@ -48,6 +48,17 @@ client = Doxie::Client.new(
 )
 ```
 
+Alternatively, you can use the [`doxie-scanner`](https://github.com/cbetta/doxie-scanner) gem to automatically connect to any scanner found. 
+
+```rb
+require 'doxie'
+require 'doxie/scanner'
+
+client = Doxie::Client.new(
+  Doxie::Scanner.devices.first
+)
+```
+
 ### `GET /hello.json`
 
 Returns status information for the scanner, firmware, network mode, and password

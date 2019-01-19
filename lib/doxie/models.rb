@@ -1,6 +1,6 @@
 module Doxie
-  API_V1 = :api_v1
-  API_V2 = :api_v2
+  API_V1 = 'API_V1'.freeze
+  API_V2 = 'API_V2'.freeze
 
   DX250 = API_V1
   DX255 = API_V2
