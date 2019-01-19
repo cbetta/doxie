@@ -5,17 +5,19 @@ module Doxie
   # The client for connecting to a Doxie scanner.
   #
   # Use the IP and password to connect as follows:
-  #   Doxie::Client.new(ip: '192.168.1.2', password: 'test')
+  #   Doxie::Client.new(ip: '192.168.1.2', model: Doxie::Q, password: 'test')
   class Client
     class Error < StandardError; end
 
     USERNAME = 'doxie'.freeze
 
-    attr_accessor :ip, :password
+    attr_accessor :ip, :password, :model, :port
 
     def initialize(options)
       @ip = options[:ip] || ''
       @password = options[:password] || ''
+      @model = options[:model] || Doxie::API_V1
+      @port = @model ==  Doxie::API_V1 ? 8080 : 80
     end
 
     def hello
@@ -23,19 +25,25 @@ module Doxie
     end
 
     def hello_extra
+      raise Error.new('Method does not exist for this model') if model ==  Doxie::API_V2
       get('/hello_extra.json')
     end
 
     def restart
-      get('/restart.json')
+      get('/restart.json') || true
     end
 
     def scans
       get('/scans.json')
+    rescue Doxie::Client::Error => error
+      # a 404 is thrown on the Doxie Q and 
+      # Doxie GO SE when there are no scans
+      raise error if model == Doxie::DX250
+      [] 
     end
 
     def recent_scans
-      get('/scans/recent.json')
+      get('/scans/recent.json') || []
     end
 
     def scan(scan_name, file_name = nil)
@@ -47,11 +55,11 @@ module Doxie
     end
 
     def delete_scan(scan_name)
-      delete("/scans#{scan_name}")
+      delete("/scans#{scan_name}") || true
     end
 
     def delete_scans(scan_names)
-      post('/scans/delete.json', scan_names)
+      post('/scans/delete.json', scan_names) || true
     end
 
     private
@@ -76,11 +84,11 @@ module Doxie
     end
 
     def uri_for(path)
-      URI("https://#{ip}:8080#{path}")
+      URI("http://#{ip}:#{port}#{path}")
     end
 
     def request(uri, message)
-      message.basic_auth USERNAME, password if password
+      message.basic_auth USERNAME, password if password && password.length > 0
       http = Net::HTTP.new(uri.host, uri.port)
       http.request(message)
     end
@@ -88,7 +96,7 @@ module Doxie
     def parse(response)
       case response
       when Net::HTTPNoContent
-        true
+        nil
       when Net::HTTPSuccess
         parse_json(response)
       else

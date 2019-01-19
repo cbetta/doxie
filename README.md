@@ -4,6 +4,14 @@
 
 A client library for the API available on WiFi-enabled [Doxie scanners](http://getdoxie.com). The specification of the API is available in their [developer documentation](/docs).
 
+## Scanners Supported
+
+This library supports the following scanners:
+
+* Doxie Go Wifi (DX250)
+* Doxie Go SE (DX255)
+* Doxie Q (DX300)
+
 ## Installation
 
 Either install directly or via bundler.
@@ -29,11 +37,15 @@ Doxie::Scanner.ips
 
 ### Client
 
-The client accepts an `ip` address and an optional `password`. You can omit the `password` if your Doxie has non set.
+The client accepts an `ip` address, a scanner model number (defaults to `Doxie::GO`) and an optional `password`. You can omit the `password` if your Doxie has non set.
 
 ```rb
 require 'doxie'
-client = Doxie::Client.new(ip: '192.168.1.2', password: 'test')
+client = Doxie::Client.new(
+    ip: '192.168.1.2', 
+    model: Doxie::Q, # of Doxie::GO, or Doxie::GO_SE
+    password: 'test'
+)
 ```
 
 ### `GET /hello.json`
@@ -91,6 +103,8 @@ client.hello_extra
 * `connectedToExternalPower`: Indicates whether the scanner is connected to
   its AC adapter versus running on battery power. This value is not cached, so
   it immediately reflects any state changes.
+
+This method is only available for the original Doxie Go WiFi model.
 
 ### `GET /restart.json`
 
@@ -188,6 +202,8 @@ obtained and released. Deleting may fail if the lock cannot be obtained
 (e.g., the scanner is busy), so consider retrying on failure conditions. When
 deleting multiple scans, use `/scans/delete.json` for best performance.
 
+This will raise an error if the file is no longer present (`Doxie::Client::Error<Net::HTTPForbidden>`)
+
 ### `POST /scans/delete.json`
 
 Deletes multiple scans in a single operation. This is much faster than deleting
@@ -197,6 +213,8 @@ each scan individually.
 client.delete_scans ["/DOXIE/JPEG/IMG_0001.JPG", "/DOXIE/JPEG/IMG_0002.JPG"]
 => true
 ```
+
+This will raise an error if the files are no longer present (`Doxie::Client::Error<Net::HTTPForbidden>`)
 
 ## Contributing
 

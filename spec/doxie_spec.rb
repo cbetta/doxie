@@ -18,8 +18,21 @@ describe 'Doxie::Client' do
     @json_response_body = json_response_body('{"key":"value"}')
     @ip = '192.168.1.1'
     @base_url = "http://#{@ip}:8080"
+    @base_url_v2 = "http://#{@ip}:80"
     @client = Doxie::Client.new(ip: @ip)
   end
+
+  describe 'Doxie Models' do
+    it 'should assign the right values to each model' do
+      assert_equal Doxie::GO, Doxie::API_V1
+      assert_equal Doxie::DX250, Doxie::API_V1
+
+      assert_equal Doxie::Q, Doxie::API_V2
+      assert_equal Doxie::GO_SE, Doxie::API_V2
+      assert_equal Doxie::DX255, Doxie::API_V2
+      assert_equal Doxie::DX300, Doxie::API_V2
+    end
+  end 
 
   describe 'get /hello.json' do
     it 'should return the result' do
@@ -34,6 +47,12 @@ describe 'Doxie::Client' do
       stub_request(:get, "#{@base_url}/hello_extra.json")
         .to_return(@json_response_body)
       @client.hello_extra.must_equal(@json_response_object)
+    end
+
+    it 'should error for API V2 models, as the method does not exist' do
+      @client = Doxie::Client.new(ip: @ip, model: Doxie::API_V2)
+      error = -> { @client.hello_extra }.must_raise(Doxie::Client::Error)
+      error.message.must_match "Method does not exist for this model"
     end
   end
 
@@ -51,6 +70,13 @@ describe 'Doxie::Client' do
         .to_return(@json_response_body)
       @client.scans.must_equal(@json_response_object)
     end
+
+    it 'should return an empty array when there are no scans on a V2 model' do
+      @client = Doxie::Client.new(ip: @ip, model: Doxie::API_V2)
+      stub_request(:get, "#{@base_url_v2}/scans.json")
+        .to_return(status: 404)
+      @client.scans.must_equal([])
+    end
   end
 
   describe 'get /scans/recent.json' do
@@ -58,6 +84,13 @@ describe 'Doxie::Client' do
       stub_request(:get, "#{@base_url}/scans/recent.json")
         .to_return(@json_response_body)
       @client.recent_scans.must_equal(@json_response_object)
+    end
+
+    it 'should return an empty array when there are no scans on a V2 model' do
+      @client = Doxie::Client.new(ip: @ip, model: Doxie::API_V2)
+      stub_request(:get, "#{@base_url_v2}/scans/recent.json")
+        .to_return(status: 204)
+      @client.recent_scans.must_equal([])
     end
   end
 
