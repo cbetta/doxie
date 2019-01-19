@@ -1,11 +1,26 @@
 language: ruby
-sudo: false
 cache: bundler
+deploy:
+  - provider: rubygems
+    gem: doxie
+    email: cristiano@betta.io
+    on:
+      tags: true
+      rvm: 2.6.0
+    api_key: $RUBYGEMS_API_KEY
 rvm:
   - 2.1
   - 2.2
-  - 2.3.1
+  - 2.3
+  - 2.4
+  - 2.5
+  - 2.6
+  - 2.6.0  # explicit branch used for deploying gem
   - ruby-head
+  - jruby
 matrix:
+  fast_finish: true
   allow_failures:
     - rvm: ruby-head
+    - rvm: jruby
+    - rvm: 2.6.0
