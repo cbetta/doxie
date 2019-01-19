@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/doxie.svg)](https://badge.fury.io/rb/doxie) [![Build Status](https://travis-ci.org/cbetta/doxie.svg?branch=master)](https://travis-ci.org/cbetta/doxie)
 
-A client library for the API available on WiFi-enabled [Doxie scanners](http://getdoxie.com). The specification of the API is available on their [developer documentation](http://help.getdoxie.com/content/doxiego/05-advanced/03-wifi/04-api/Doxie-API-Developer-Guide.pdf).
+A client library for the API available on WiFi-enabled [Doxie scanners](http://getdoxie.com). The specification of the API is available in their [developer documentation](/docs).
 
 ## Installation
 
