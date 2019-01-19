@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/doxie.svg)](https://badge.fury.io/rb/doxie) [![Build Status](https://travis-ci.org/cbetta/doxie.svg?branch=master)](https://travis-ci.org/cbetta/doxie)
 
-A wrapper for the [Doxie Go Wifi](http://getdoxie.com) API. Specification as per the [developer documentation](http://help.getdoxie.com/content/doxiego/05-advanced/03-wifi/04-api/Doxie-API-Developer-Guide.pdf).
+A client library for the API available on WiFi-enabled [Doxie scanners](http://getdoxie.com). The specification of the API is available on their [developer documentation](http://help.getdoxie.com/content/doxiego/05-advanced/03-wifi/04-api/Doxie-API-Developer-Guide.pdf).
 
 ## Installation
 
@@ -15,9 +15,9 @@ gem 'doxie-scanner' # optional if your Doxie is not on a fixed IP
 
 ## Usage
 
-### Finding your Doxie
+### Optional: Finding your Doxie's IP
 
-This requires the [`doxie_scanner`](https://github.com/cbetta/doxie_scanner) gem. This gem has a bigger dependency than the `doxie` gem which is why it has been split into a seperate library.
+This optional step requires the [`doxie-scanner`](https://github.com/cbetta/doxie-scanner) gem. This gem has a bigger dependency than the `doxie` gem, which is why it has been intentionally separated into a seperate library.
 
 ```rb
 require 'doxie/scanner'
@@ -29,7 +29,7 @@ Doxie::Scanner.ips
 
 ### Client
 
-The client accepts an `ip` and `password`. You can omit the `password` if your Doxie has non set.
+The client accepts an `ip` address and an optional `password`. You can omit the `password` if your Doxie has non set.
 
 ```rb
 require 'doxie'
