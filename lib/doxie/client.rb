@@ -38,7 +38,7 @@ module Doxie
     rescue Doxie::Client::Error => error
       # a 404 is thrown on the Doxie Q and 
       # Doxie GO SE when there are no scans
-      raise error if model == Doxie::DX250
+      raise error if model == Doxie::API_V1
       [] 
     end
 
