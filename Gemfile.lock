@@ -6,20 +6,20 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.6.0)
-      public_suffix (>= 2.0.2, < 4.0)
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
-    fakefs (0.20.0)
-    hashdiff (0.3.8)
-    minitest (5.11.3)
-    public_suffix (3.0.3)
-    rake (12.3.2)
+    fakefs (1.2.2)
+    hashdiff (1.0.1)
+    minitest (5.14.0)
+    public_suffix (4.0.5)
+    rake (13.0.1)
     safe_yaml (1.0.5)
-    webmock (3.5.1)
+    webmock (3.8.3)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
-      hashdiff
+      hashdiff (>= 0.4.0, < 2.0.0)
 
 PLATFORMS
   ruby
@@ -32,4 +32,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.17.3
+   2.1.4

@@ -9,14 +9,12 @@ deploy:
     email: cristiano@betta.io
     on:
       tags: true
-      rvm: 2.6.0
+      rvm: 2.7.1
     api_key: $RUBYGEMS_API_KEY
 rvm:
-  - 2.3
-  - 2.4
   - 2.5
   - 2.6
-  - 2.6.0  # explicit branch used for deploying gem
+  - 2.7.1  # explicit branch used for deploying gem
   - ruby-head
   - jruby
 matrix:
@@ -24,4 +22,4 @@ matrix:
   allow_failures:
     - rvm: ruby-head
     - rvm: jruby
-    - rvm: 2.6.0
+    - rvm: 2.7.1
