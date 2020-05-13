@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.expand_path('lib/doxie/version', File.dirname(__FILE__))
 
 Gem::Specification.new do |s|
@@ -13,8 +15,8 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
   s.require_path = 'lib'
 
+  s.add_development_dependency('fakefs')
+  s.add_development_dependency('minitest')
   s.add_development_dependency('rake')
   s.add_development_dependency('webmock')
-  s.add_development_dependency('minitest')
-  s.add_development_dependency('fakefs')
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'net/http'
 require 'json'
 
@@ -9,7 +11,7 @@ module Doxie
   class Client
     class Error < StandardError; end
 
-    USERNAME = 'doxie'.freeze
+    USERNAME = 'doxie'
 
     attr_accessor :ip, :password, :model, :port
 
@@ -17,7 +19,7 @@ module Doxie
       @ip = options[:ip] || ''
       @password = options[:password] || ''
       @model = options[:model] || Doxie::API_V1
-      @port = @model ==  Doxie::API_V1 ? 8080 : 80
+      @port = @model == Doxie::API_V1 ? 8080 : 80
     end
 
     def hello
@@ -25,7 +27,10 @@ module Doxie
     end
 
     def hello_extra
-      raise Error.new('Method does not exist for this model') if model ==  Doxie::API_V2
+      if model == Doxie::API_V2
+        raise Doxie::Client::Error, 'Method does not exist for this model'
+      end
+
       get('/hello_extra.json')
     end
 
@@ -35,11 +40,12 @@ module Doxie
 
     def scans
       get('/scans.json')
-    rescue Doxie::Client::Error => error
-      # a 404 is thrown on the Doxie Q and 
+    rescue Doxie::Client::Error => e
+      # a 404 is thrown on the Doxie Q and
       # Doxie GO SE when there are no scans
-      raise error if model == Doxie::API_V1
-      [] 
+      raise e if model == Doxie::API_V1
+
+      []
     end
 
     def recent_scans
@@ -88,7 +94,7 @@ module Doxie
     end
 
     def request(uri, message)
-      message.basic_auth USERNAME, password if password && password.length > 0
+      message.basic_auth USERNAME, password if password && !password.empty?
       http = Net::HTTP.new(uri.host, uri.port)
       http.request(message)
     end

@@ -2,3 +2,6 @@
 Metrics/BlockLength:
   Exclude:
     - "**/*_spec.rb"
+
+AllCops:
+  NewCops: enable

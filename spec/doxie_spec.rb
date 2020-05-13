@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'minitest/autorun'
 require 'webmock/minitest'
 require 'fakefs'
@@ -32,7 +34,7 @@ describe 'Doxie::Client' do
       assert_equal Doxie::DX255, Doxie::API_V2
       assert_equal Doxie::DX300, Doxie::API_V2
     end
-  end 
+  end
 
   describe 'get /hello.json' do
     it 'should return the result' do
@@ -52,7 +54,7 @@ describe 'Doxie::Client' do
     it 'should error for API V2 models, as the method does not exist' do
       @client = Doxie::Client.new(ip: @ip, model: Doxie::API_V2)
       error = _(-> { @client.hello_extra }).must_raise(Doxie::Client::Error)
-      _(error.message).must_match "Method does not exist for this model"
+      _(error.message).must_match 'Method does not exist for this model'
     end
   end
 
@@ -98,7 +100,8 @@ describe 'Doxie::Client' do
     it 'should return the result' do
       stub_request(:get, "#{@base_url}/scans/DOXIE/JPEG/IMG_0001.JPG")
         .to_return(@json_response_body)
-      _(@client.scan('/DOXIE/JPEG/IMG_0001.JPG')).must_equal(@json_response_object)
+      _(@client.scan('/DOXIE/JPEG/IMG_0001.JPG'))
+        .must_equal(@json_response_object)
     end
 
     it 'should write to file' do
@@ -113,13 +116,14 @@ describe 'Doxie::Client' do
       stub_request(:get, "#{@base_url}/thumbnails/DOXIE/JPEG/IMG_0001.JPG")
         .to_return(@json_response_body)
       _(@client.thumbnail('/DOXIE/JPEG/IMG_0001.JPG'))
-             .must_equal(@json_response_object)
+        .must_equal(@json_response_object)
     end
 
     it 'should write to file' do
       stub_request(:get, "#{@base_url}/thumbnails/DOXIE/JPEG/IMG_0001.JPG")
         .to_return(@json_response_body)
-      _(@client.thumbnail('/DOXIE/JPEG/IMG_0001.JPG', 'test.jpg')).must_equal(true)
+      _(@client.thumbnail('/DOXIE/JPEG/IMG_0001.JPG', 'test.jpg'))
+        .must_equal(true)
     end
   end
 
@@ -128,7 +132,7 @@ describe 'Doxie::Client' do
       stub_request(:delete, "#{@base_url}/scans/DOXIE/JPEG/IMG_0001.JPG")
         .to_return(@json_response_body)
       _(@client.delete_scan('/DOXIE/JPEG/IMG_0001.JPG'))
-             .must_equal(@json_response_object)
+        .must_equal(@json_response_object)
     end
   end
 
@@ -137,7 +141,7 @@ describe 'Doxie::Client' do
       stub_request(:post, "#{@base_url}/scans/delete.json")
         .to_return(status: 204)
       _(@client.delete_scans(['/DOXIE/JPEG/IMG_0001.JPG']))
-             .must_equal(true)
+        .must_equal(true)
     end
   end
 
