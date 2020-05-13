@@ -1,6 +1,6 @@
 # Ruby API library for Doxie Go Wifi
 
-[![Gem Version](https://badge.fury.io/rb/doxie.svg)](https://badge.fury.io/rb/doxie) [![Build Status](https://travis-ci.org/cbetta/doxie.svg?branch=master)](https://travis-ci.org/cbetta/doxie)
+[![Gem Version](https://badge.fury.io/rb/doxie.svg)](https://badge.fury.io/rb/doxie) [![Build Status](https://travis-ci.com/cbetta/doxie.svg?branch=master)](https://travis-ci.com/cbetta/doxie)
 
 A client library for the API available on WiFi-enabled [Doxie scanners](http://getdoxie.com). The specification of the API is available in their [developer documentation](/docs).
 
