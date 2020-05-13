@@ -1,2 +1,4 @@
+* 4.0.0 Remove support for Ruby 2.3/2.4
+* 3.0.0 Add support for latest Doxie scanners
 * 2.0.0 Updated gems, rubocop checks, and changed error response
 * 1.0.0 Initial release
